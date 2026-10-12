@@ -11,18 +11,25 @@ export default function Series() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const location = useLocation();
-  const selectedEpisodeId = location.state?.selectedEpisodeId;
+  const initialEpisodeId = location.state?.selectedEpisodeId;
+  const [activeEpisodeId, setActiveEpisodeId] = useState<string | undefined>(initialEpisodeId);
   const series = seriesList.find(s => s.id === id);
   const selectedEpisodeRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (selectedEpisodeRef.current) {
+    if (location.state?.selectedEpisodeId) {
+      setActiveEpisodeId(location.state.selectedEpisodeId);
+    }
+  }, [location.state?.selectedEpisodeId]);
+
+  useEffect(() => {
+    if (selectedEpisodeRef.current && initialEpisodeId) {
       // Small delay to ensure Modal's scrollTop=0 has finished
       setTimeout(() => {
         selectedEpisodeRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }, 50);
     }
-  }, [selectedEpisodeId]);
+  }, [initialEpisodeId]);
 
   if (!series) {
     return (
@@ -41,6 +48,17 @@ export default function Series() {
   const episodes = videos
     .filter(v => v.seriesId === series.id)
     .sort((a, b) => (a.episodeNumber || 0) - (b.episodeNumber || 0));
+
+  const handlePlayEpisode = (episodeId: string) => {
+    setActiveEpisodeId(episodeId);
+    navigate(location.pathname, { 
+      state: { ...location.state, selectedEpisodeId: episodeId }, 
+      replace: true 
+    });
+    setIsPlaying(true);
+  };
+
+  const activeEpisode = episodes.find(e => e.id === activeEpisodeId) || episodes[0];
 
   return (
     <Modal title={series.title}>
@@ -97,12 +115,12 @@ export default function Series() {
           <div className="modal-buttons">
             {episodes.length > 0 && (
               <button 
-                onClick={() => setIsPlaying(true)} 
+                onClick={() => activeEpisode && handlePlayEpisode(activeEpisode.id)} 
                 className="btn btn-primary" 
                 style={{ backgroundColor: 'white', color: 'black', padding: '10px 24px', fontWeight: 600 }}
               >
                 <Play fill="currentColor" size={20} />
-                Watch Episode 1
+                Watch Episode {activeEpisode?.episodeNumber || 1}
               </button>
             )}
           </div>
@@ -136,15 +154,15 @@ export default function Series() {
         {episodes.length > 0 ? (
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             {episodes.map(episode => {
-              const isSelected = selectedEpisodeId === episode.id;
+              const isSelected = activeEpisodeId === episode.id;
               return (
               <div 
                 key={episode.id} 
-                onClick={() => setIsPlaying(true)}
+                onClick={() => handlePlayEpisode(episode.id)}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
-                    setIsPlaying(true);
+                    handlePlayEpisode(episode.id);
                   }
                 }}
                 role="button"
