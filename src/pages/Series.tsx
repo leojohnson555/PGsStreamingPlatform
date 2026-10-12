@@ -141,15 +141,16 @@ export default function Series() {
               <div 
                 key={episode.id} 
                 onClick={() => setIsPlaying(true)}
-                className={`episode-row ${isSelected ? 'episode-selected' : ''}`}
-                style={{ 
-                  cursor: 'pointer', 
-                  backgroundColor: isSelected ? 'rgba(255,255,255,0.1)' : 'transparent',
-                  borderRadius: '8px',
-                  padding: isSelected ? '0.5rem' : '0',
-                  margin: isSelected ? '-0.5rem 0 1rem 0' : '0 0 1rem 0',
-                  border: isSelected ? '1px solid rgba(255,255,255,0.2)' : 'none'
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setIsPlaying(true);
+                  }
                 }}
+                role="button"
+                tabIndex={0}
+                aria-label={`Play episode ${episode.episodeNumber || ''}: ${episode.title}`}
+                className={`episode-row ${isSelected ? 'episode-selected' : ''}`}
                 ref={isSelected ? selectedEpisodeRef : null}
               >
                 <div className="episode-thumbnail-container">
