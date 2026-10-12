@@ -25,21 +25,18 @@
 }
 
 .episode-row:hover,
-.episode-row:focus-visible,
-.episode-row.episode-selected {
+.episode-row:focus,
+.episode-row:focus-visible {
   background-color: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.16);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  border-color: var(--color-brand-accent);
+  box-shadow: 0 0 0 1px rgba(45, 138, 78, 0.4), 0 4px 16px rgba(0, 0, 0, 0.4);
 }
 
+/* Selected episode gets a stronger highlight with brand accent border */
 .episode-row.episode-selected {
   background-color: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.28);
-}
-
-.episode-row:focus-visible {
   border-color: var(--color-brand-accent);
-  box-shadow: 0 0 0 2px rgba(45, 138, 78, 0.4), 0 4px 16px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 0 1px rgba(45, 138, 78, 0.5), 0 4px 16px rgba(0, 0, 0, 0.4);
 }
 
 .episode-thumbnail-container {
@@ -59,6 +56,7 @@
 }
 
 .episode-row:hover .episode-large-number,
+.episode-row:focus .episode-large-number,
 .episode-row:focus-visible .episode-large-number,
 .episode-row.episode-selected .episode-large-number {
   color: #ffffff;
@@ -124,6 +122,7 @@
 }
 
 .episode-row:hover .episode-thumbnail img,
+.episode-row:focus .episode-thumbnail img,
 .episode-row:focus-visible .episode-thumbnail img,
 .episode-row.episode-selected .episode-thumbnail img {
   transform: scale(1.06);
@@ -135,6 +134,7 @@
 }
 
 .episode-row:hover .video-card-overlay,
+.episode-row:focus .video-card-overlay,
 .episode-row:focus-visible .video-card-overlay,
 .episode-row.episode-selected .video-card-overlay {
   opacity: 1;
@@ -146,6 +146,7 @@
 }
 
 .episode-row:hover .play-icon,
+.episode-row:focus .play-icon,
 .episode-row:focus-visible .play-icon,
 .episode-row.episode-selected .play-icon {
   transform: scale(1);
