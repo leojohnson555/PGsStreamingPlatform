@@ -1,0 +1,141 @@
+.series-hero {
+  position: relative;
+  height: clamp(260px, 40vh, 320px);
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 2rem;
+}
+
+.episode-row {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1rem 0;
+  border-radius: var(--border-radius);
+  border-bottom: 1px solid var(--color-border);
+  transition: background-color var(--transition-normal);
+  align-items: flex-start;
+}
+
+.episode-row:hover {
+  background-color: var(--color-bg-card);
+}
+
+.episode-row:last-child {
+  border-bottom: none;
+}
+
+.episode-thumbnail-container {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.episode-large-number {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #737373;
+  width: 30px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.episode-thumbnail {
+  position: relative;
+  flex: 0 0 160px;
+  width: 160px;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  background-color: var(--color-bg-card);
+}
+
+@media (min-width: 768px) {
+  .episode-thumbnail {
+    flex: 0 0 200px;
+    width: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .episode-row {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.5rem 0;
+  }
+  
+  .episode-thumbnail-container {
+    width: 100%;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  .episode-large-number {
+    font-size: 1.8rem;
+    width: 25px;
+  }
+  
+  .episode-thumbnail {
+    flex: 1;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+  }
+  
+  .episode-title {
+    font-size: 1rem;
+  }
+  
+  .episode-desc {
+    font-size: 0.85rem;
+  }
+}
+
+.episode-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-normal);
+}
+
+.episode-row:hover .episode-thumbnail img {
+  transform: scale(1.05);
+}
+
+.episode-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.episode-title {
+  font-size: 1.1rem;
+  color: var(--color-text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.episode-number {
+  color: var(--color-text-secondary);
+  margin-right: 0.5rem;
+}
+
+.episode-thumbnail-duration {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  font-size: 0.75rem;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 500;
+  z-index: 2;
+}
+
+.episode-desc {
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+  -webkit-line-clamp: 2; /* from text-multiline-truncate */
+}

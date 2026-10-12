@@ -1,0 +1,99 @@
+.series-card {
+  display: block;
+  width: 100%;
+  border-radius: var(--border-radius);
+  transition: transform var(--transition-normal);
+  cursor: pointer;
+  position: relative;
+}
+
+.series-card:hover {
+  transform: scale(1.03);
+}
+
+.series-card-thumbnail {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: var(--border-radius);
+  background-color: var(--color-bg-card);
+  box-shadow: 4px 4px 0 rgba(255, 255, 255, 0.1), 8px 8px 0 rgba(255, 255, 255, 0.05);
+}
+
+.series-card-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-normal);
+}
+
+.series-card:hover .series-card-thumbnail img {
+  transform: scale(1.05);
+}
+
+.series-card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.series-card:hover .series-card-overlay {
+  opacity: 1;
+}
+
+.series-icon-container {
+  background-color: rgba(0,0,0,0.6);
+  border-radius: 50%;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: scale(0.8);
+  transition: transform var(--transition-normal);
+}
+
+.series-icon {
+  color: white;
+}
+
+.series-card:hover .series-icon-container {
+  transform: scale(1);
+}
+
+.series-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: var(--color-brand-accent);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.series-card-info {
+  padding: 1rem 0;
+}
+
+.series-title {
+  font-size: 1.1rem;
+  color: var(--color-text-primary);
+  margin-bottom: 4px;
+}
+
+.series-meta {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+}
